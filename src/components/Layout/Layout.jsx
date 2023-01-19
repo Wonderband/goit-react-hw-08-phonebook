@@ -8,7 +8,7 @@ export const Layout = () => {
         <header>
           <Navigation></Navigation>
         </header>
-        HELLO! Im Layout
+        {/* HELLO! Im Layout */}
         <Outlet />
       </div>
     </>
