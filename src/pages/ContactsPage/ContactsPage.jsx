@@ -1,9 +1,9 @@
 import { Section } from 'components/Section/Section';
 
-export const RegisterPage = () => {
+export const ContactsPage = () => {
   return (
     <Section>
-      <p>Hi, lets register!</p>
+      <p>My contacts</p>
     </Section>
   );
 };

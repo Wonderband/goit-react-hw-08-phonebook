@@ -1,9 +1,9 @@
 import { Section } from 'components/Section/Section';
 
-export const RegisterPage = () => {
+export const LoginPage = () => {
   return (
     <Section>
-      <p>Hi, lets register!</p>
+      <p>Hi, lets login!</p>
     </Section>
   );
 };

@@ -1,4 +1,3 @@
-import { Outlet } from 'react-router-dom';
 import css from './Section.module.css';
 export const Section = ({ children }) => {
   return (
