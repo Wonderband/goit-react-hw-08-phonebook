@@ -1,0 +1,6 @@
+.container {
+    width: 1800px;
+    padding: 10px;
+    margin: 0 auto;
+    outline: 1px solid red;
+}
