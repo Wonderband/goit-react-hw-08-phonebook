@@ -2,7 +2,7 @@
     display: flex;
     flex-direction: column;
     gap: 10px;
-    /* width: 300px;
+    width: 300px;
     margin-top: 20px;
 }
 
@@ -12,12 +12,12 @@ input {
 }
 
 button {
+    display: inline-block;
     padding: 10px;
     font-size: large;
     font-weight: bold;
-    display: inline;
 }
 
-/* .label {
-    display: inline;
+.label {
+    display: block;
 } */
