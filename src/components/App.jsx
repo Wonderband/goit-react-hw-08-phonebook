@@ -4,6 +4,7 @@ import { Homepage } from 'pages/HomePage/Homepage';
 import { RegisterPage } from 'pages/RegisterPage/RegisterPage';
 import { LoginPage } from 'pages/LoginPage/LoginPage';
 import { ContactsPage } from 'pages/ContactsPage/ContactsPage';
+// import { UserMenu } from './UserMenu/UserMenu';
 
 export const App = () => {
   return (

@@ -8,7 +8,6 @@ import { selectUser } from 'redux/selectors';
 
 export const RegisterPage = () => {
   const userInfo = useSelector(selectUser);
-  console.log(userInfo);
   return (
     <Section>
       <Helmet>
