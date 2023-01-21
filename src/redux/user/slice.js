@@ -1,5 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { register } from './operations';
+import Notiflix from 'notiflix';
 
 const initialState = {
     user: {
@@ -23,7 +24,7 @@ export const userSlice = createSlice({
                 // state.password = payload.password;
                 state.token = payload.token;
                 state.isLoggedIn = true;                
-                console.log(state.user);
+                Notiflix.Notify.success(`Succesfully registered!  Name: ${payload.user.name} Email: ${payload.user.email}`);
             })
         .addCase(register.rejected, () => {console.log('rejected!'); })
     } 
