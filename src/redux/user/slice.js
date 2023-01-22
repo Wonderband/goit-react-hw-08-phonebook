@@ -1,5 +1,5 @@
 import { createSlice, isAnyOf } from '@reduxjs/toolkit';
-import { logIn, register } from './operations';
+import { logIn, logOut, register } from './operations';
 import Notiflix from 'notiflix';
 
 const initialState = {
@@ -33,7 +33,7 @@ const handleFulfilled = (state, { payload }) => {
 const handleRejected = (state, payload) => {
   Notiflix.Loading.remove();
   state.isLoggedIn = false;
-  state.isLoading = false;  
+  state.isLoading = false;
 };
 
 export const userSlice = createSlice({
@@ -50,20 +50,27 @@ export const userSlice = createSlice({
         Notiflix.Notify.failure(`Cannot register!  ${payload.payload}`);
         console.log(payload);
       })
-      .addCase(logIn.fulfilled, (state, { payload }) => {
-        // state.user.name = payload.user.name;
-        // state.user.email = payload.user.email;
-        // state.token = payload.token;
-        // state.isLoggedIn = true;
-        // state.isLoading = false;
-        // Notiflix.Loading.remove();
+      .addCase(logIn.fulfilled, (_, { payload }) => {
         Notiflix.Notify.success(
           `Succesfully logged in!  Name: ${payload.user.name} Email: ${payload.user.email}`
         );
-        console.log(payload);
       })
       .addCase(logIn.rejected, (_, payload) => {
         Notiflix.Notify.failure(`Cannot log In!  ${payload.payload}`);
+      })
+      .addCase(logOut.pending, () => {
+        Notiflix.Loading.circle();       
+      })
+      .addCase(logOut.fulfilled, (state) => {
+        Notiflix.Loading.remove();
+        Notiflix.Notify.info(`Succesfully logged out!`);
+        state.user = { name: null, email: null };
+        state.token = null;
+        state.isLoggedIn = false;        
+      })
+      .addCase(logOut.rejected, (_, payload) => {
+        Notiflix.Loading.remove();
+        Notiflix.Notify.failure(`Cannot log out!`);
         console.log(payload);
       })
       .addMatcher(isAnyOf(...getOption('pending')), handlePending)
@@ -71,3 +78,5 @@ export const userSlice = createSlice({
       .addMatcher(isAnyOf(...getOption('rejected')), handleRejected);
   },
 });
+
+export const userReducer = userSlice.reducer;

@@ -26,7 +26,15 @@ async function loginUser(cred, thunkAPI) {
     return thunkAPI.rejectWithValue(error.message);
   }
 }
+async function logOutUser (_, thunkAPI) {
+  try {
+    await axInstance.post('/users/logout');    
+    axInstance.defaults.headers.common['Authorization'] = ``;
+  } catch (error) {
+    return thunkAPI.rejectWithValue(error.message);
+  }
+}
 
 export const register = createAsyncThunk('user/register', registerUser);
-
 export const logIn = createAsyncThunk('user/login', loginUser);
+export const logOut = createAsyncThunk('user/logout', logOutUser);

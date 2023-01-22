@@ -10,7 +10,7 @@ export const LoginForm = () => {
       email: email.value,
       password: password.value,
     };
-    console.log(credentials);
+    // console.log(credentials);
     dispatch(logIn(credentials));
   };
   return (
