@@ -26,9 +26,10 @@ async function loginUser(cred, thunkAPI) {
     return thunkAPI.rejectWithValue(error.message);
   }
 }
-async function logOutUser (_, thunkAPI) {
+async function logOutUser(token, thunkAPI) {
+   axInstance.defaults.headers.common['Authorization'] = `Bearer ${token}`;
   try {
-    await axInstance.post('/users/logout');    
+    await axInstance.post('/users/logout');   
     axInstance.defaults.headers.common['Authorization'] = ``;
   } catch (error) {
     return thunkAPI.rejectWithValue(error.message);

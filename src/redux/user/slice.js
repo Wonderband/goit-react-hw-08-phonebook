@@ -7,10 +7,9 @@ const initialState = {
     name: null,
     email: null,
   },
-
   token: null,
   isLoggedIn: false,
-  isLoading: false,
+  // isLoading: false,
 };
 
 const options = [logIn, register];
@@ -18,7 +17,7 @@ const getOption = status => options.map(option => option[status]);
 
 const handlePending = state => {
   state.isLoggedIn = false;
-  state.isLoading = true;
+  // state.isLoading = true;
   Notiflix.Loading.circle();
 };
 
@@ -28,12 +27,12 @@ const handleFulfilled = (state, { payload }) => {
   state.user.email = payload.user.email;
   state.token = payload.token;
   state.isLoggedIn = true;
-  state.isLoading = false;
+  // state.isLoading = false;
 };
 const handleRejected = (state, payload) => {
   Notiflix.Loading.remove();
   state.isLoggedIn = false;
-  state.isLoading = false;
+  // state.isLoading = false;
 };
 
 export const userSlice = createSlice({
@@ -63,15 +62,15 @@ export const userSlice = createSlice({
       })
       .addCase(logOut.fulfilled, (state) => {
         Notiflix.Loading.remove();
-        Notiflix.Notify.info(`Succesfully logged out!`);
+        Notiflix.Notify.success(`Succesfully logged out!`);
         state.user = { name: null, email: null };
         state.token = null;
         state.isLoggedIn = false;        
       })
       .addCase(logOut.rejected, (_, payload) => {
         Notiflix.Loading.remove();
-        Notiflix.Notify.failure(`Cannot log out!`);
-        console.log(payload);
+        Notiflix.Notify.failure(`Cannot log out! ${payload.payload}`);
+        // console.log(payload);
       })
       .addMatcher(isAnyOf(...getOption('pending')), handlePending)
       .addMatcher(isAnyOf(...getOption('fulfilled')), handleFulfilled)
