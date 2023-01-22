@@ -9,7 +9,7 @@ export const ContactsPage = () => {
         <title>Contacts</title>
       </Helmet>
       <p>My contacts</p>
-      <UserMenu />
+      {/* <UserMenu /> */}
     </Section>
   );
 };

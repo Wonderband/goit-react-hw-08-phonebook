@@ -4,7 +4,7 @@ import { Section } from 'components/Section/Section';
 import { RegisterForm } from 'components/RegisterForm/RegisterForm';
 import { Helmet } from 'react-helmet-async';
 import { useSelector } from 'react-redux';
-import { selectUser } from 'redux/selectors';
+import { selectUser } from 'redux/user/selectors';
 
 export const RegisterPage = () => {
   const userInfo = useSelector(selectUser);
