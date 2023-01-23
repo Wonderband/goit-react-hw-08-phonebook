@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { createAsyncThunk } from '@reduxjs/toolkit';
+import Notiflix from 'notiflix';
 
 const axInstance = axios.create({
   baseURL: 'https://connections-api.herokuapp.com',
@@ -8,23 +9,56 @@ const axInstance = axios.create({
   },
 });
 
+const logInterceptor = config => {
+  config.headers['Authorization'] = localStorage.getItem('token');
+  return config;
+};
 
-async function addNewContact(cred, thunkAPI) {
-  // axInstance.defaults.headers.common['Authorization'] = JSON.parse(localStorage.getItem('persist:userData'))['token'];
-  // console.log(JSON.parse(localStorage.getItem('persist:userData')).token);
-    // `Bearer ${cred.token}`;
-  const token = localStorage.getItem('token');
-    axInstance.defaults.headers.common['Authorization'] = `Bearer ${token}`;
-    console.log(cred);
+axInstance.interceptors.request.use(logInterceptor);
+
+async function fetchAllContacts(_, thunkAPI) {
   try {
-      const result = await axInstance.post('/contacts', { name: cred.name, number: cred.number });
-    console.log(result);
-    // axInstance.defaults.headers.common['Authorization'] = `Bearer ${result.data.token}`;
+    const result = await axInstance.get('/contacts');
+    Notiflix.Notify.success(`Contacts found!`);   
     return result.data;
-  } catch (err) {
-      console.log(err.message);
-    return thunkAPI.rejectWithValue(err.message);
+  } catch (error) {
+    return thunkAPI.rejectWithValue(error.message);
   }
 }
 
-export const addContact = createAsyncThunk('contacts/addContact', addNewContact);
+async function addNewContact(cred, thunkAPI) {
+  const getContacts = await axInstance.get('/contacts');
+  if (
+    getContacts.data.some(
+      contact => contact.name.toLowerCase() === cred.name.toLowerCase().trim()
+    )
+  ) {
+    Notiflix.Notify.failure(`${cred.name} is already in contacts! Cannot add!`);
+    return thunkAPI.rejectWithValue('Double name!');
+  } else {
+    try {
+      const result = await axInstance.post('/contacts', {
+        name: cred.name,
+        number: cred.number,
+      });
+      Notiflix.Notify.success(
+        `New contact created! Name: ${cred.name}  Number: ${cred.number}`
+      );    
+      return result.data;
+    } catch (error) {
+      Notiflix.Notify.failure(
+        `Cannot add new contact!  Reason: ${error.response.statusText}`
+      );
+      return thunkAPI.rejectWithValue(error.message);
+    }
+  }
+}
+
+export const addContact = createAsyncThunk(
+  'contacts/addContact',
+  addNewContact
+);
+export const fetchContacts = createAsyncThunk(
+  'contacts/fetchContacts',
+  fetchAllContacts
+);

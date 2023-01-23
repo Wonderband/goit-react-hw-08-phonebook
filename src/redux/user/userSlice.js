@@ -11,7 +11,6 @@ const initialState = {
   isLoggedIn: false,
   isLoading: false,
   isError: false,
-
 };
 
 const options = [logIn, register];
@@ -20,18 +19,16 @@ const getOption = status => options.map(option => option[status]);
 const handlePending = state => {
   state.isLoggedIn = false;
   state.isLoading = true;
-  state.isError = false; 
+  state.isError = false;
 };
-
-const handleFulfilled = (state, { payload }) => { 
+const handleFulfilled = (state, { payload }) => {
   state.user = payload.user;
-  // state.user.email = payload.user.email;
   state.token = payload.token;
-  state.isLoggedIn = true;  
+  state.isLoggedIn = true;
   state.isLoading = false;
   state.isError = false;
 };
-const handleRejected = (state, payload) => {  
+const handleRejected = state => {
   state.isLoggedIn = false;
   state.isLoading = false;
   state.isError = true;
@@ -42,39 +39,19 @@ export const userSlice = createSlice({
   initialState,
   extraReducers: builder => {
     builder
-      // .addCase(register.fulfilled, (state, { payload }) => {
-      //   Notiflix.Notify.success(
-      //     `Succesfully registered!  Name: ${payload.user.name} Email: ${payload.user.email}`
-      //   );
-      // })
-      // .addCase(register.rejected, (state, payload) => {
-      //   Notiflix.Notify.failure(`Cannot register!  ${payload.payload}`);
-      //   console.log(payload);
-      // })
-      // .addCase(logIn.fulfilled, (_, { payload }) => {
-      //   Notiflix.Notify.success(
-      //     `Succesfully logged in!  Name: ${payload.user.name} Email: ${payload.user.email}`
-      //   );
-      // })
-      // .addCase(logIn.rejected, (_, payload) => {
-      //   Notiflix.Notify.failure(`Cannot log In!  ${payload.payload}`);
-      // })
-      // .addCase(logOut.pending, () => {
-      //   Notiflix.Loading.circle();       
-      // })
-      .addCase(logOut.fulfilled, (state) => {
-        // Notiflix.Loading.remove();
-        // Notiflix.Notify.success(`Succesfully logged out!`);
+      .addCase(logOut.pending, state => {
+        state.isLoggedIn = false;
+        state.isLoading = true;
+        state.isError = false;
+      })
+      .addCase(logOut.fulfilled, state => {
         state.user = { name: null, email: null };
         state.token = null;
-        state.isLoggedIn = false; 
+        state.isLoggedIn = false;
         state.isError = false;
         state.isLoading = false;
       })
-      .addCase(logOut.rejected, (state) => {
-        // Notiflix.Loading.remove();
-        // Notiflix.Notify.failure(`Cannot log out! ${payload.payload}`);
-        // console.log(payload);
+      .addCase(logOut.rejected, state => {
         state.isError = true;
         state.isLoading = false;
       })

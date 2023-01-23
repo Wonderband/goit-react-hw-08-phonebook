@@ -13,25 +13,31 @@ import {
   selectUser,
 } from 'redux/selectors';
 import Notiflix from 'notiflix';
+import { useEffect } from 'react';
 // import { UserMenu } from './UserMenu/UserMenu';
 
 export const App = () => {
   const isLoading = useSelector(selectIsLoading);
-  const isError = useSelector(selectIsError);
-  const user = useSelector(selectUser);
-  const isLogged = useSelector(selectIsLogged);
+  // const isError = useSelector(selectIsError);
+  // const user = useSelector(selectUser);
+  // const isLogged = useSelector(selectIsLogged);
+
+  // useEffect(() => {
+  //   isError && Notiflix.Notify.failure('Ooups... Something went wrong!');
+  // }, [isError]);
+
+  // useEffect(() => {
+  //   isLogged &&
+  //     Notiflix.Notify.success(
+  //       `Succesfully logged in!  Name: ${user.name} Email: ${user.email}`
+  //     );
+  //   !isLogged && Notiflix.Notify.success(`You're not logged!`);
+  // }, [isLogged, user]);
 
   return (
     <div>
       {isLoading && Notiflix.Loading.circle()}
       {!isLoading && Notiflix.Loading.remove()}
-      {isError && Notiflix.Notify.failure('Ooups... Something went wrong!')}
-      {isLogged &&
-        Notiflix.Notify.success(
-          `Succesfully logged in!  Name: ${user.name} Email: ${user.email}`
-        )}
-      {!isLogged && Notiflix.Notify.success(`You're not logged!`)}
-      {/* {console.log(user)} */}
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route index element={<Homepage />} />

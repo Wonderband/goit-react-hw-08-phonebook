@@ -1,17 +1,19 @@
-import { createSlice} from '@reduxjs/toolkit';
-import Notiflix from 'notiflix';
-import { addContact } from './operations';
+import { createSlice } from '@reduxjs/toolkit';
+import { addContact, fetchContacts } from './operations';
 
 const initialState = {
   contactsArray: [],
+  isLoading: false,
+
 };
 
+// const options = [logIn, register];
+// const getOption = status => options.map(option => option[status]);
 
 
 // const handlePending = state => {
 //   state.isLoggedIn = false;
-//   // state.isLoading = true;
-//   Notiflix.Loading.circle();
+//   state.isLoading = true; 
 // };
 
 // const handleFulfilled = (state, { payload }) => {
@@ -34,11 +36,15 @@ export const contactsSlice = createSlice({
   initialState,
   extraReducers: builder => {
     builder
-        .addCase(addContact.fulfilled, (state, { payload }) => {
-            state.contactsArray.push(payload);
-        Notiflix.Notify.success(
-          `Succesfully added!  Name: ${payload.name} Email: ${payload.number}`
-        );
+      .addCase(addContact.fulfilled, (state, { payload }) => {
+        state.contactsArray.push(payload);
+        // console.log(payload);
+        // Notiflix.Notify.success(
+        //   `Succesfully added!  Name: ${payload.name} Email: ${payload.number}`
+        // );
+      })
+      .addCase(fetchContacts.fulfilled, (state, { payload }) => { 
+        state.contactsArray = payload;
       })
     //   .addCase(register.rejected, (state, payload) => {
     //     Notiflix.Notify.failure(`Cannot register!  ${payload.payload}`);
@@ -67,9 +73,9 @@ export const contactsSlice = createSlice({
     //     Notiflix.Notify.failure(`Cannot log out! ${payload.payload}`);
     //     // console.log(payload);
     //   })
-    //   .addMatcher(isAnyOf(...getOption('pending')), handlePending)
-    //   .addMatcher(isAnyOf(...getOption('fulfilled')), handleFulfilled)
-    //   .addMatcher(isAnyOf(...getOption('rejected')), handleRejected);
+      // .addMatcher(isAnyOf(...getOption('pending')), handlePending)
+      // .addMatcher(isAnyOf(...getOption('fulfilled')), handleFulfilled)
+      // .addMatcher(isAnyOf(...getOption('rejected')), handleRejected);
   },
 });
 

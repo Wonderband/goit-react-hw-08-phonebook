@@ -4,6 +4,7 @@ import { ContactForm } from '../../components/ContactForm/ContactForm';
 // import { ContactList } from '../../Components/ContactList/ContactList';
 import { Helmet } from 'react-helmet-async';
 import { Filter } from 'components/Filter/Filter';
+import { ContactList } from 'components/ContactsList/ContactsList';
 
 export const ContactsPage = () => {
   return (
@@ -14,7 +15,7 @@ export const ContactsPage = () => {
       <ContactForm />
       <h2>My contacts</h2>
       <Filter />
-      {/* <ContactList /> */}
+      <ContactList />
     </Section>
   );
 };

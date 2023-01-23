@@ -17,7 +17,7 @@ import { userReducer } from './user/userSlice';
 const persistConfig = {
   key: 'userData',
   storage,
-  blacklist: ['token'],
+  blacklist: ['token', 'isError', 'isLoading'],
 };
 
 export const store = configureStore({
@@ -33,8 +33,6 @@ export const store = configureStore({
       },
     }),
 });
-
-// export const store = {};
 
 export const persistor = persistStore(store);
 
