@@ -21,11 +21,15 @@ export const App = () => {
           <Route index element={<Homepage />} />
           <Route
             path="register"
-            element={<AuthRoute redirectTo="/" component={<RegisterPage />} />}
+            element={
+              <AuthRoute redirectTo="/contacts" component={<RegisterPage />} />
+            }
           />
           <Route
             path="login"
-            element={<AuthRoute redirectTo="/" component={<LoginPage />} />}
+            element={
+              <AuthRoute redirectTo="/contacts" component={<LoginPage />} />
+            }
           />
           <Route
             path="contacts"
