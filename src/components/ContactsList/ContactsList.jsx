@@ -3,14 +3,11 @@ import PropTypes from 'prop-types';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchContacts } from 'redux/contacts/operations';
-
-// import { fetchContacts } from '../../redux/operations';
+import { selectFilter } from 'redux/selectors';
 
 export const ContactList = () => {
-  const { contactsArray, isLoading, error } = useSelector(
-    state => state.contacts
-  );
-  const filter = ''; //useSelector(state => state.filter);
+  const { contactsArray } = useSelector(state => state.contacts);
+  const filter = useSelector(selectFilter);
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(fetchContacts());
@@ -33,6 +30,7 @@ export const ContactList = () => {
             />
           );
         })}
+      {contactsArray.length === 0 && <p>You have no contacts!</p>}
     </ul>
   );
 };

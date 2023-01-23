@@ -17,7 +17,7 @@ export const ContactForm = () => {
       // id: nanoid(),
     };
     dispatch(addContact(newContact));
-    e.target.reset();
+    // e.target.reset();
   };
   return (
     <form onSubmit={handleSubmit}>

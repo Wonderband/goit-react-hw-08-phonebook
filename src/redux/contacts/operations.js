@@ -20,6 +20,7 @@ async function fetchAllContacts(_, thunkAPI) {
   try {
     const result = await axInstance.get('/contacts');
     Notiflix.Notify.success(`Contacts found!`);   
+    console.log(result.data);
     return result.data;
   } catch (error) {
     return thunkAPI.rejectWithValue(error.message);
@@ -54,6 +55,20 @@ async function addNewContact(cred, thunkAPI) {
   }
 }
 
+async function deleteThisContact(id, thunkAPI) {
+    try {
+      const response = await axInstance.delete(`/contacts/${id}`); 
+      Notiflix.Notify.success(
+        `Successfully deleted!`
+      );   
+      console.log(response);
+      return response.data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.message);
+    }
+  }
+
+
 export const addContact = createAsyncThunk(
   'contacts/addContact',
   addNewContact
@@ -62,3 +77,5 @@ export const fetchContacts = createAsyncThunk(
   'contacts/fetchContacts',
   fetchAllContacts
 );
+
+export const deleteContact = createAsyncThunk('contacts/deleteContact', deleteThisContact);

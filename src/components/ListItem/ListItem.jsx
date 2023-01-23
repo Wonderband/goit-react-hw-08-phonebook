@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
 import { useDispatch } from 'react-redux';
-// import { deleteContact } from '../../../redux/operations';
+import { deleteContact } from 'redux/contacts/operations';
+
 import css from './ListItem.module.css';
 
 export const ListItem = ({ id, name, number }) => {
@@ -8,7 +9,9 @@ export const ListItem = ({ id, name, number }) => {
   return (
     <li className={css.liFlex}>
       {name} : {number}
-      <button type="button">Delete</button>
+      <button type="button" onClick={() => dispatch(deleteContact(id))}>
+        Delete
+      </button>
     </li>
   );
 };

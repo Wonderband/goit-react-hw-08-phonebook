@@ -6,34 +6,12 @@ import { LoginPage } from 'pages/LoginPage/LoginPage';
 import { ContactsPage } from 'pages/ContactsPage/ContactsPage';
 import { AuthRoute, LoggedRoute } from './RedirectRoute';
 import { useSelector } from 'react-redux';
-import {
-  selectIsError,
-  selectIsLoading,
-  selectIsLogged,
-  selectUser,
-} from 'redux/selectors';
+import { selectIsLoading } from 'redux/selectors';
 import Notiflix from 'notiflix';
-import { useEffect } from 'react';
-// import { UserMenu } from './UserMenu/UserMenu';
+import { Page404 } from 'pages/Page404/Page404';
 
 export const App = () => {
   const isLoading = useSelector(selectIsLoading);
-  // const isError = useSelector(selectIsError);
-  // const user = useSelector(selectUser);
-  // const isLogged = useSelector(selectIsLogged);
-
-  // useEffect(() => {
-  //   isError && Notiflix.Notify.failure('Ooups... Something went wrong!');
-  // }, [isError]);
-
-  // useEffect(() => {
-  //   isLogged &&
-  //     Notiflix.Notify.success(
-  //       `Succesfully logged in!  Name: ${user.name} Email: ${user.email}`
-  //     );
-  //   !isLogged && Notiflix.Notify.success(`You're not logged!`);
-  // }, [isLogged, user]);
-
   return (
     <div>
       {isLoading && Notiflix.Loading.circle()}
@@ -55,6 +33,7 @@ export const App = () => {
               <LoggedRoute redirectTo="/" component={<ContactsPage />} />
             }
           />
+          <Route path="*" element={<Page404 />} />
         </Route>
       </Routes>
     </div>
