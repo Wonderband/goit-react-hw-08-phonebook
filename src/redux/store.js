@@ -12,12 +12,12 @@ import {
 import storage from 'redux-persist/lib/storage';
 import { contactsReducer } from './contacts/contactsSlice';
 import { filterReducer } from './filter/filterSlice';
-import { userReducer } from './user/slice';
+import { userReducer } from './user/userSlice';
 
 const persistConfig = {
   key: 'userData',
   storage,
-  // blacklist: ['isLoading'],
+  blacklist: ['token'],
 };
 
 export const store = configureStore({

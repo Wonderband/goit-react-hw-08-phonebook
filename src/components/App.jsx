@@ -5,11 +5,33 @@ import { RegisterPage } from 'pages/RegisterPage/RegisterPage';
 import { LoginPage } from 'pages/LoginPage/LoginPage';
 import { ContactsPage } from 'pages/ContactsPage/ContactsPage';
 import { AuthRoute, LoggedRoute } from './RedirectRoute';
+import { useSelector } from 'react-redux';
+import {
+  selectIsError,
+  selectIsLoading,
+  selectIsLogged,
+  selectUser,
+} from 'redux/selectors';
+import Notiflix from 'notiflix';
 // import { UserMenu } from './UserMenu/UserMenu';
 
 export const App = () => {
+  const isLoading = useSelector(selectIsLoading);
+  const isError = useSelector(selectIsError);
+  const user = useSelector(selectUser);
+  const isLogged = useSelector(selectIsLogged);
+
   return (
     <div>
+      {isLoading && Notiflix.Loading.circle()}
+      {!isLoading && Notiflix.Loading.remove()}
+      {isError && Notiflix.Notify.failure('Ooups... Something went wrong!')}
+      {isLogged &&
+        Notiflix.Notify.success(
+          `Succesfully logged in!  Name: ${user.name} Email: ${user.email}`
+        )}
+      {!isLogged && Notiflix.Notify.success(`You're not logged!`)}
+      {/* {console.log(user)} */}
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route index element={<Homepage />} />
