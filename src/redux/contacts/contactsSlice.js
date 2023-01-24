@@ -11,8 +11,8 @@ const handlePending = state => {
 };
 
 const handleRejected = (state, { payload }) => {
-  state.isLoading = false;
-  state.contactsArray = [];
+  state.isLoading = false; 
+  console.log(payload);
 };
 
 const options = [fetchContacts, addContact, deleteContact];

@@ -1,6 +1,6 @@
 import { Route, Routes } from 'react-router-dom';
 import { Layout } from './Layout/Layout';
-import { HomePage } from 'pages/HomePage/Hage';
+import { HomePage } from 'pages/HomePage/HomePage';
 import { RegisterPage } from 'pages/RegisterPage/RegisterPage';
 import { LoginPage } from 'pages/LoginPage/LoginPage';
 import { ContactsPage } from 'pages/ContactsPage/ContactsPage';
@@ -12,7 +12,7 @@ import { Page404 } from 'pages/Page404/Page404';
 import { lazy, Suspense, useEffect } from 'react';
 import { getUserData } from 'redux/user/operations';
 
-// const HomePage = lazy(() => import('pages/HomePage/Homepage'));
+// const HomePage = lazy(() => import('pages/HomePage/HomePage'));
 // const RegisterPage = lazy(() => {
 //   'pages/RegisterPage/RegisterPage';
 // });
@@ -37,9 +37,9 @@ export const App = () => {
     <div>
       {isLoading && Notiflix.Loading.circle()}
       {!isLoading && Notiflix.Loading.remove()}
-      <Routes>
-        <Route path="/" element={<Layout />}>
-          <Suspense fallback={Notiflix.Loading.circle()}>
+      <Suspense fallback={''}>
+        <Routes>
+          <Route path="/" element={<Layout />}>
             <Route index element={<HomePage />} />
             <Route
               path="register"
@@ -63,9 +63,9 @@ export const App = () => {
               }
             />
             <Route path="*" element={<Page404 />} />
-          </Suspense>
-        </Route>
-      </Routes>
+          </Route>
+        </Routes>
+      </Suspense>
     </div>
   );
 };
