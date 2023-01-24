@@ -12,7 +12,7 @@ const handlePending = state => {
 
 const handleRejected = (state, { payload }) => {
   state.isLoading = false;
-  console.log(payload);
+  state.contactsArray = [];
 };
 
 const options = [fetchContacts, addContact, deleteContact];

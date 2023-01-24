@@ -20,10 +20,10 @@ async function registerUser(cred, thunkAPI) {
     Notiflix.Notify.success(
         `Succesfully registered!  Name: ${result.data.user.name} Email: ${result.data.user.email}`
       );
-    return result.data;
+    return result.data.user;
   } catch (error) {
     Notiflix.Notify.failure(
-        `Cannot register you!  Reason: ${error.response.statusText}`
+        `Cannot register you!  Reason: ${error.message}`
     );
     console.log(error);
     return thunkAPI.rejectWithValue(error.message);
@@ -37,7 +37,7 @@ async function loginUser(cred, thunkAPI) {
     Notiflix.Notify.success(
         `Succesfully logged in!  Name: ${result.data.user.name} Email: ${result.data.user.email}`
       );
-    return result.data;
+    return result.data.user;
   } catch (error) {
     Notiflix.Notify.failure(
         `Cannot log you in!  Reason: ${error.message}`
@@ -61,6 +61,25 @@ async function logOutUser(_, thunkAPI) {
   }
 }
 
+async function getCurrentUserData(_, thunkAPI) { 
+  try {
+    const result = await axInstance.get('/users/current'); 
+    console.log(result);
+    Notiflix.Notify.success(
+        `Succesfully logged in!  Name: ${result.data.name} Email: ${result.data.email}`
+    );
+    console.log(result);
+    return result.data;
+    
+  } catch (error) {
+    Notiflix.Notify.failure(
+        `Cannot log you in!  Reason: ${error.message}`
+    );
+    return thunkAPI.rejectWithValue(error.message);    
+  }
+}
+
 export const register = createAsyncThunk('user/register', registerUser);
 export const logIn = createAsyncThunk('user/login', loginUser);
 export const logOut = createAsyncThunk('user/logout', logOutUser);
+export const getUserData = createAsyncThunk('user/getData', getCurrentUserData);

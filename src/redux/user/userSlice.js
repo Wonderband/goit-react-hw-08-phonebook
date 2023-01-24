@@ -1,37 +1,36 @@
 import { createSlice, isAnyOf } from '@reduxjs/toolkit';
-import { logIn, logOut, register } from './operations';
-// import Notiflix from 'notiflix';
+import { getUserData, logIn, logOut, register } from './operations';
 
 const initialState = {
   user: {
     name: null,
     email: null,
   },
-  token: null,
+  // token: null,
   isLoggedIn: false,
   isLoading: false,
-  isError: false,
+  // isError: false,
 };
 
-const options = [logIn, register];
+const options = [logIn, register, getUserData];
 const getOption = status => options.map(option => option[status]);
 
 const handlePending = state => {
   state.isLoggedIn = false;
   state.isLoading = true;
-  state.isError = false;
+  // state.isError = false;
 };
 const handleFulfilled = (state, { payload }) => {
-  state.user = payload.user;
-  state.token = payload.token;
+  state.user = { name: payload.name, email: payload.email };
+  // state.token = payload.token;
   state.isLoggedIn = true;
   state.isLoading = false;
-  state.isError = false;
+  // state.isError = false;
 };
 const handleRejected = state => {
   state.isLoggedIn = false;
   state.isLoading = false;
-  state.isError = true;
+  // state.isError = true;
 };
 
 export const userSlice = createSlice({
@@ -42,17 +41,17 @@ export const userSlice = createSlice({
       .addCase(logOut.pending, state => {
         state.isLoggedIn = false;
         state.isLoading = true;
-        state.isError = false;
+        // state.isError = false;
       })
       .addCase(logOut.fulfilled, state => {
         state.user = { name: null, email: null };
-        state.token = null;
+        // state.token = null;
         state.isLoggedIn = false;
-        state.isError = false;
+        // state.isError = false;
         state.isLoading = false;
       })
       .addCase(logOut.rejected, state => {
-        state.isError = true;
+        // state.isError = true;
         state.isLoading = false;
       })
       .addMatcher(isAnyOf(...getOption('pending')), handlePending)

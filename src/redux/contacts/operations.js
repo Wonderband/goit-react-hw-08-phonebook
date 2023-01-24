@@ -28,30 +28,40 @@ async function fetchAllContacts(_, thunkAPI) {
 }
 
 async function addNewContact(cred, thunkAPI) {
-  const getContacts = await axInstance.get('/contacts');
-  if (
-    getContacts.data.some(
-      contact => contact.name.toLowerCase() === cred.name.toLowerCase().trim()
-    )
-  ) {
-    Notiflix.Notify.failure(`${cred.name} is already in contacts! Cannot add!`);
-    return thunkAPI.rejectWithValue('Double name!');
-  } else {
-    try {
-      const result = await axInstance.post('/contacts', {
-        name: cred.name,
-        number: cred.number,
-      });
-      Notiflix.Notify.success(
-        `New contact created! Name: ${cred.name}  Number: ${cred.number}`
-      );
-      return result.data;
-    } catch (error) {
+  try {
+    const getContacts = await axInstance.get('/contacts');
+    if (
+      getContacts.data.some(
+        contact => contact.name.toLowerCase() === cred.name.toLowerCase().trim()
+      )
+    ) {
       Notiflix.Notify.failure(
-        `Cannot add a new contact!  Reason: ${error.response.statusText}`
+        `${cred.name} is already in contacts! Cannot add!`
       );
-      return thunkAPI.rejectWithValue(error.message);
+      return thunkAPI.rejectWithValue('Double name!');
+    } else {
+      try {
+        const result = await axInstance.post('/contacts', {
+          name: cred.name,
+          number: cred.number,
+        });
+        Notiflix.Notify.success(
+          `New contact created! Name: ${cred.name}  Number: ${cred.number}`
+        );
+        return result.data;
+      } catch (error) {
+        // Notiflix.Notify.failure(
+        //   `Cannot add a new contact!  Reason: ${error.response.statusText}`
+        // );
+        // return thunkAPI.rejectWithValue(error.message);
+        throw new Error(error.message);
+      }
     }
+  } catch (error) {
+    Notiflix.Notify.failure(
+      `Cannot add a new contact!  Reason: ${error.response.statusText}`
+    );
+    return thunkAPI.rejectWithValue(error.message);
   }
 }
 

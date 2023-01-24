@@ -1,7 +1,7 @@
 import { Section } from 'components/Section/Section';
 import { Helmet } from 'react-helmet-async';
 
-export const Homepage = () => {
+export const HomePage = () => {
   return (
     <Section>
       <Helmet>

@@ -29,7 +29,12 @@ export const RegisterForm = () => {
       </label>
       <label className={css.label}>
         Password:
-        <input type="password" name="password" placeholder="Input password" />
+        <input
+          type="password"
+          name="password"
+          minLength={7}
+          placeholder="Input password"
+        />
       </label>
       <button type="submit">Submit</button>
     </form>
