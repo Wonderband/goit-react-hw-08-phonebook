@@ -14,7 +14,7 @@ export const ContactForm = () => {
     // e.target.reset();
   };
   return (
-    <form onSubmit={handleSubmit}>
+    <form className={css.addContactForm} onSubmit={handleSubmit}>
       <label className={css.label}>
         Name:
         <input

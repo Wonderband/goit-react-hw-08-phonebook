@@ -1,3 +1,4 @@
+import { ContactList } from 'components/ContactsList/ContactsList';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectFilter } from 'redux/selectors';
 import { setFilter } from '../../redux/filter/filterSlice';
@@ -10,16 +11,21 @@ export const Filter = () => {
     dispatch(setFilter(e.target.value.toLowerCase().trim()));
   };
   return (
-    <>
-      <p>Find contacts by name</p>
-      <input
-        type="text"
-        name="filter"
-        className={css.input}
-        title="Find the name!"
-        value={filter}
-        onChange={filterHandle}
-      />
-    </>
+    <div className={css.contactsHead}>
+      <ContactList />
+      {/* <p></p> */}
+
+      <label className={css.labelFilter}>
+        Find contacts by name:
+        <input
+          type="text"
+          name="filter"
+          className={css.input}
+          title="Find the name!"
+          value={filter}
+          onChange={filterHandle}
+        />
+      </label>
+    </div>
   );
 };

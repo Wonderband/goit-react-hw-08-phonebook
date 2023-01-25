@@ -2,5 +2,11 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    gap: 15px;
+    gap: 40px;
+    font-size: large;
+}
+
+.deleteButton {
+    padding: 5px 10px;
+    font-size: small;
 }

@@ -1,6 +1,14 @@
 .container {
-    width: 1800px;
+   width: 1800px;
     padding: 10px;
     margin: 0 auto;
-    outline: 1px solid red;
+    /* outline: 1px solid red; */
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    /* outline: 1px solid blue; */
+    padding: 10px;
+    
 }

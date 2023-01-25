@@ -1,0 +1,12 @@
+.userMenu {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.logoutButton {
+    display: block;
+    margin: 0 auto 0 0;
+}
+
+.creden {font-weight: bold;}

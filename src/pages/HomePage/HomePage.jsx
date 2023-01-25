@@ -1,7 +1,7 @@
 import { Section } from 'components/Section/Section';
 import { Helmet } from 'react-helmet-async';
 
-export const HomePage = () => {
+const HomePage = () => {
   return (
     <Section>
       <Helmet>
@@ -11,3 +11,5 @@ export const HomePage = () => {
     </Section>
   );
 };
+
+export default HomePage;

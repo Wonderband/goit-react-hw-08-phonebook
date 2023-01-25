@@ -9,7 +9,11 @@ export const ListItem = ({ id, name, number }) => {
   return (
     <li className={css.liFlex}>
       {name} : {number}
-      <button type="button" onClick={() => dispatch(deleteContact(id))}>
+      <button
+        className={css.deleteButton}
+        type="button"
+        onClick={() => dispatch(deleteContact(id))}
+      >
         Delete
       </button>
     </li>

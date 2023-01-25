@@ -8,7 +8,7 @@ import { Helmet } from 'react-helmet-async';
 // import Notiflix from 'notiflix';
 // import { selectUser } from 'redux/selectors';
 
-export const RegisterPage = () => {
+const RegisterPage = () => {
   return (
     <Section>
       <Helmet>
@@ -21,3 +21,5 @@ export const RegisterPage = () => {
     </Section>
   );
 };
+
+export default RegisterPage;

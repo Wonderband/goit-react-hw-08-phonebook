@@ -4,6 +4,7 @@ import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchContacts } from 'redux/contacts/operations';
 import { selectFilter } from 'redux/selectors';
+import css from './ContactsList.module.css';
 
 export const ContactList = () => {
   const { contactsArray } = useSelector(state => state.contacts);
@@ -13,7 +14,8 @@ export const ContactList = () => {
     dispatch(fetchContacts());
   }, [dispatch]);
   return (
-    <ul>
+    <ul className={css.list}>
+      <h2>My contacts: </h2>
       {contactsArray
         .filter(item => item.name.toLowerCase().includes(filter))
         .map(item => {

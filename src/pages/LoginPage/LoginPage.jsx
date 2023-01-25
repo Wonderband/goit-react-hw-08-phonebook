@@ -2,7 +2,7 @@ import { LoginForm } from 'components/LoginForm/LoginForm';
 import { Section } from 'components/Section/Section';
 import { Helmet } from 'react-helmet-async';
 
-export const LoginPage = () => {
+const LoginPage = () => {
   return (
     <Section>
       <Helmet>
@@ -12,3 +12,5 @@ export const LoginPage = () => {
     </Section>
   );
 };
+
+export default LoginPage;

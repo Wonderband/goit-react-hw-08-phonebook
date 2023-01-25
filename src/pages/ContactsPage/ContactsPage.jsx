@@ -4,16 +4,18 @@ import { Helmet } from 'react-helmet-async';
 import { Filter } from 'components/Filter/Filter';
 import { ContactList } from 'components/ContactsList/ContactsList';
 
-export const ContactsPage = () => {
+const ContactsPage = () => {
   return (
     <Section>
       <Helmet>
         <title>Contacts</title>
       </Helmet>
       <ContactForm />
-      <h2>My contacts</h2>
+      {/* <h2>My contacts</h2> */}
       <Filter />
-      <ContactList />
+      {/* <ContactList /> */}
     </Section>
   );
 };
+
+export default ContactsPage;

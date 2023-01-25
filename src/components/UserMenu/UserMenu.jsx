@@ -1,6 +1,7 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { logOut } from 'redux/user/operations';
 import { selectIsLogged, selectUser } from 'redux/selectors';
+import css from './UserMenu.module.css';
 
 export const UserMenu = () => {
   const user = useSelector(selectUser);
@@ -11,10 +12,18 @@ export const UserMenu = () => {
   return (
     <>
       {isLoggedIn && (
-        <div>
-          <p>Name: {user.name}</p>
-          <p>Email: {user.email}</p>
-          <button type="button" onClick={handleLogOut}>
+        <div className={css.userMenu}>
+          <p>
+            <span className={css.creden}>Name:</span> {user.name}
+          </p>
+          <p>
+            <span className={css.creden}>Email:</span> {user.email}
+          </p>
+          <button
+            className={css.logoutButton}
+            type="button"
+            onClick={handleLogOut}
+          >
             Logout
           </button>
         </div>

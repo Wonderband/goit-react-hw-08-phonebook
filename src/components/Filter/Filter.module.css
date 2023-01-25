@@ -1,6 +1,14 @@
-.input {
-    margin-left: 10px;
-    /* border-radius: 10%; */
-    font-size: large;
-    padding: 5px;
+
+.contactsHead {
+    display: flex;       
+    justify-content: center;
+    padding: 10px;
+    gap: 100px;
+        
+}
+
+.labelFilter {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
 }

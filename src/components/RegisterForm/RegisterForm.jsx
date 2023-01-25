@@ -20,15 +20,12 @@ export const RegisterForm = () => {
   return (
     <form className={css.form} onSubmit={submitHandler}>
       <label className={css.label}>
-        Name:
         <input type="text" name="name" placeholder="Input name" />
       </label>
       <label className={css.label}>
-        Email:
         <input type="email" name="email" placeholder="Input email" />
       </label>
       <label className={css.label}>
-        Password:
         <input
           type="password"
           name="password"
