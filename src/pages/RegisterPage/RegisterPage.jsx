@@ -15,9 +15,6 @@ const RegisterPage = () => {
         <title>Registration</title>
       </Helmet>
       <RegisterForm />
-      {/* <h2>{userInfo && userInfo.user.name}</h2>
-      <h2>{userInfo.user && userInfo.user.email}</h2>
-      <h2>{userInfo.token}</h2> */}
     </Section>
   );
 };
