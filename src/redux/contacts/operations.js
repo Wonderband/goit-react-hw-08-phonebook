@@ -1,20 +1,21 @@
-import axios from 'axios';
+// import axios from 'axios';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import Notiflix from 'notiflix';
+import { axInstance} from '../user/operations'
 
-const axInstance = axios.create({
-  baseURL: 'https://connections-api.herokuapp.com',
-  headers: {
-    'Content-Type': 'application/json',
-  },
-});
+// const axInstance = axios.create({
+//   baseURL: 'https://connections-api.herokuapp.com',
+//   headers: {
+//     'Content-Type': 'application/json',
+//   },
+// });
 
-const logInterceptor = config => {
-  config.headers['Authorization'] = localStorage.getItem('token');
-  return config;
-};
+// const logInterceptor = config => {
+//   config.headers['Authorization'] = localStorage.getItem('token');
+//   return config;
+// };
 
-axInstance.interceptors.request.use(logInterceptor);
+// axInstance.interceptors.request.use(logInterceptor);
 
 async function fetchAllContacts(_, thunkAPI) {
   try {

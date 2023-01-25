@@ -6,10 +6,9 @@ const initialState = {
     name: null,
     email: null,
   },
-  // token: null,
+  token: null,
   isLoggedIn: false,
-  isLoading: false,
-  // isError: false,
+  isLoading: false,  
 };
 
 const options = [logIn, register, getUserData];
@@ -17,20 +16,18 @@ const getOption = status => options.map(option => option[status]);
 
 const handlePending = state => {
   state.isLoggedIn = false;
-  state.isLoading = true;
-  // state.isError = false;
+  state.isLoading = true;  
 };
 const handleFulfilled = (state, { payload }) => {
-  state.user = { name: payload.name, email: payload.email };
-  // state.token = payload.token;
+  state.user = { name: payload.user.name, email: payload.user.email };
+  state.token = payload.token;
   state.isLoggedIn = true;
   state.isLoading = false;
-  // state.isError = false;
-};
+}
+  
 const handleRejected = state => {
   state.isLoggedIn = false;
-  state.isLoading = false;
-  // state.isError = true;
+  state.isLoading = false;  
 };
 
 export const userSlice = createSlice({
@@ -40,18 +37,15 @@ export const userSlice = createSlice({
     builder
       .addCase(logOut.pending, state => {
         state.isLoggedIn = false;
-        state.isLoading = true;
-        // state.isError = false;
+        state.isLoading = true;       
       })
       .addCase(logOut.fulfilled, state => {
         state.user = { name: null, email: null };
-        // state.token = null;
-        state.isLoggedIn = false;
-        // state.isError = false;
+        state.token = null;
+        state.isLoggedIn = false;        
         state.isLoading = false;
       })
-      .addCase(logOut.rejected, state => {
-        // state.isError = true;
+      .addCase(logOut.rejected, state => {        
         state.isLoading = false;
       })
       .addMatcher(isAnyOf(...getOption('pending')), handlePending)

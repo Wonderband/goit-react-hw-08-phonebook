@@ -11,6 +11,7 @@ import Notiflix from 'notiflix';
 import { Page404 } from 'pages/Page404/Page404';
 import { lazy, Suspense, useEffect } from 'react';
 import { getUserData } from 'redux/user/operations';
+import { Loader } from './Loader/Loader';
 
 const HomePage = lazy(() => import('pages/HomePage/HomePage'));
 const RegisterPage = lazy(() => import('pages/RegisterPage/RegisterPage'));
@@ -31,20 +32,7 @@ export const App = () => {
     <div>
       {isLoading && Notiflix.Loading.circle()}
       {!isLoading && Notiflix.Loading.remove()}
-      <Suspense
-        fallback={
-          <div className="lds-roller">
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-          </div>
-        }
-      >
+      <Suspense fallback={<Loader />}>
         <Routes>
           <Route path="/" element={<Layout />}>
             <Route index element={<HomePage />} />

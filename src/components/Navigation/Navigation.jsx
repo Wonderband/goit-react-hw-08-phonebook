@@ -8,10 +8,33 @@ export const Navigation = () => {
   // console.log(isLoggedIn);
   return (
     <nav className={css.nav}>
-      <NavLink to="/">HOME</NavLink>
-      {isLoggedIn && <NavLink to="/contacts">CONTACTS</NavLink>}
-      {!isLoggedIn && <NavLink to="/register">REGISTER</NavLink>}
-      {!isLoggedIn && <NavLink to="/login">LOGIN</NavLink>}
+      <NavLink className={({ isActive }) => isActive && css.active} to="/">
+        HOME
+      </NavLink>
+      {isLoggedIn && (
+        <NavLink
+          className={({ isActive }) => isActive && css.active}
+          to="/contacts"
+        >
+          CONTACTS
+        </NavLink>
+      )}
+      {!isLoggedIn && (
+        <NavLink
+          className={({ isActive }) => isActive && css.active}
+          to="/register"
+        >
+          REGISTER
+        </NavLink>
+      )}
+      {!isLoggedIn && (
+        <NavLink
+          className={({ isActive }) => isActive && css.active}
+          to="/login"
+        >
+          LOGIN
+        </NavLink>
+      )}
     </nav>
   );
 };
