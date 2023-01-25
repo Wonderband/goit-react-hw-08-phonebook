@@ -12,11 +12,10 @@ import { Page404 } from 'pages/Page404/Page404';
 import { lazy, Suspense, useEffect } from 'react';
 import { getUserData } from 'redux/user/operations';
 
-const HomePage = lazy(() => import('../pages/HomePage/HomePage'));
-const RegisterPage = lazy(() => import('../pages/RegisterPage/RegisterPage'));
-
-const LoginPage = lazy(() => import('../pages/LoginPage/LoginPage'));
-const ContactsPage = lazy(() => import('../pages/ContactsPage/ContactsPage'));
+const HomePage = lazy(() => import('pages/HomePage/HomePage'));
+const RegisterPage = lazy(() => import('pages/RegisterPage/RegisterPage'));
+const LoginPage = lazy(() => import('pages/LoginPage/LoginPage'));
+const ContactsPage = lazy(() => import('pages/ContactsPage/ContactsPage'));
 
 export const App = () => {
   const isLoading = useSelector(selectIsLoading);
