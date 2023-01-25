@@ -31,7 +31,7 @@ export const App = () => {
     <div>
       {isLoading && Notiflix.Loading.circle()}
       {!isLoading && Notiflix.Loading.remove()}
-      <Suspense fallback={Notiflix.Loading.circle()}>
+      <Suspense fallback={<div> {Notiflix.Loading.circle()}</div>}>
         <Routes>
           <Route path="/" element={<Layout />}>
             <Route index element={<HomePage />} />
